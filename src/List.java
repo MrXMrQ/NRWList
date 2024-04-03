@@ -31,7 +31,7 @@ public class List {
      * false.
      */
     public void next() {
-        if(hasAccess() && it != last) {
+        if (hasAccess() && it != last) {
             it = it.getNext();
         }
     }
@@ -41,7 +41,7 @@ public class List {
      * Objekt. Ist die Liste leer, geschieht nichts.
      */
     public void toFirst() {
-        if(!isEmpty()) {
+        if (!isEmpty()) {
             it = first;
         }
     }
@@ -51,7 +51,7 @@ public class List {
      * Objekt. Ist die Liste leer, geschieht nichts.
      */
     public void toLast() {
-        if(!isEmpty()) {
+        if (!isEmpty()) {
             it = last;
         }
     }
@@ -62,11 +62,10 @@ public class List {
      * gibt die Anfrage den Wert null zurück.
      */
     public Object getContent() {
-        if(hasAccess()) {
+        if (hasAccess()) {
             return it.getItem();
         } else {
             return null;
-
         }
     }
 
@@ -76,7 +75,7 @@ public class List {
      * bleibt die Liste unverändert.
      */
     public void setContent(Object item) {
-        if(hasAccess() && item != null) {
+        if (hasAccess() && item != null) {
             it.setItem(item);
         }
     }
@@ -89,10 +88,10 @@ public class List {
      * unverändert.
      */
     public void append(Object item) {
-        if(item != null) {
+        if (item != null) {
             Knoten neu = new Knoten(item, null);
 
-            if(isEmpty()) {
+            if (isEmpty()) {
                 first = last = neu;
             } else {
                 last.setNext(neu);
@@ -111,11 +110,11 @@ public class List {
      * gleich null ist, bleibt die Liste unverändert.
      */
     public void insert(Object item) {
-        if(isEmpty()) {
+        if (isEmpty()) {
             first = new Knoten(item, null);
             last = first;
-        } else if(hasAccess()) {
-            if(it == first) {
+        } else if (hasAccess()) {
+            if (it == first) {
                 Knoten neu = new Knoten(item, first);
                 first = neu;
             } else {
@@ -129,13 +128,38 @@ public class List {
         }
     }
 
+    public void insertSorted(Object item) {
+        if (isEmpty()) {
+            first = new Knoten(item, null);
+            last = first;
+        } else {
+            Knoten help = first;
+            Knoten neu = new Knoten(item, null);
+
+
+
+            while (help.getNext() != null) {
+                if(((Buch) neu.getItem()).getID() > ((Buch) help.getNext().getItem()).getID()) {
+                    help = help.getNext();
+                } else {
+                    neu.setNext(help.getNext());
+                    help.setNext(neu);
+                    return;
+                }
+            }
+
+            last.setNext(neu);
+            last = neu;
+        }
+    }
+
     /*
      * Die Liste list wird an die Liste angehängt. Anschließend wird list
      * eine leere Liste. Das aktuelle Objekt bleibt unverändert. Falls list null
      * oder eine leere Liste ist, bleibt die Liste unverändert.
      */
     public void concat(List list) {
-        if(!list.isEmpty()) {
+        if (!list.isEmpty()) {
             last.setNext(list.first);
             last = list.last;
             list.first = null;
@@ -153,16 +177,16 @@ public class List {
      */
     public void remove() {
         // Fall 1: Liste ist leer oder es gibt kein aktuelles Element
-        if(hasAccess()) {
+        if (hasAccess()) {
             // Fall 2: Liste besteht aus nur einem Element
-            if(first == last) {
+            if (first == last) {
                 first = null;
                 last = null;
                 it = null;
 
             } else {
                 // Fall 3a: es soll vorne gelöscht werden
-                if(first == it) {
+                if (first == it) {
                     it = first.getNext();
                     first = it;
 
@@ -170,18 +194,35 @@ public class List {
                 // Fall 4: es soll in der Mitte gelöscht werden
                 else {
                     Knoten help = first;
-                    while(help.getNext() != it) {
+                    while (help.getNext() != it) {
                         help = help.getNext();
                     }
                     help.setNext(it.getNext());
                     it = help.getNext();
 
                     // Fall 3b: es soll hinten gelöscht werden
-                    if(help.getNext() == null) {
+                    if (help.getNext() == null) {
                         last = help;
                     }
                 }
             }
         }
+    }
+
+    public void print() {
+        System.out.println("------------------------------------------------------------------------------------------------------------------------");
+        Knoten help = first;
+        while (help != null) {
+            Buch temp = (Buch) help.getItem();
+            System.out.print("Buch Nr: " + temp.getID() + " geschrieben von " + temp.getAutor() + " mit dem Titel " + temp.getTitel() + " kostet " + temp.getPreis() + " $!");
+
+            if (help == first) System.out.print("  <=== first");
+            if (help == last) System.out.print("  <=== last");
+            if (help == it) System.out.print("  <=== act");
+
+            System.out.println();
+            help = help.getNext();
+        }
+        System.out.println("------------------------------------------------------------------------------------------------------------------------");
     }
 }
