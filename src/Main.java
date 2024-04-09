@@ -6,7 +6,6 @@ public class Main {
     public static void test() {
         List list = new List();
 
-        list.append(new Buch("Herr der Ringe", "J.R.R. Tolkien", 13.99, 1));
         list.append(new Buch("Harry Potter und der Stein der Weisen", "J.K. Rowling", 12.99, 2));
 
         list.append(new Buch("1984", "George Orwell", 9.99, 4));
@@ -34,7 +33,7 @@ public class Main {
 
         list.print();
 
-        list.insertSorted(new Buch("Der Hobbit", "J.R.R. Tolkien", 10.99, 3));
+        list.insertSorted(new Buch("Der Hobbit", "J.R.R. Tolkien", 10.99, 1));
 
         list.print();
     }

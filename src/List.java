@@ -136,7 +136,11 @@ public class List {
             Knoten help = first;
             Knoten neu = new Knoten(item, null);
 
-
+            if (((Buch) neu.getItem()).getID() < ((Buch) help.getItem()).getID()) {
+                neu.setNext(help);
+                first = neu;
+                return;
+            }
 
             while (help.getNext() != null) {
                 if(((Buch) neu.getItem()).getID() > ((Buch) help.getNext().getItem()).getID()) {
