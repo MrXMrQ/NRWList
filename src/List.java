@@ -143,7 +143,7 @@ public class List {
             }
 
             while (help.getNext() != null) {
-                if(((Buch) neu.getItem()).getID() > ((Buch) help.getNext().getItem()).getID()) {
+                if (((Buch) neu.getItem()).getID() > ((Buch) help.getNext().getItem()).getID()) {
                     help = help.getNext();
                 } else {
                     neu.setNext(help.getNext());
