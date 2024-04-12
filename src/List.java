@@ -193,7 +193,6 @@ public class List {
                 if (first == it) {
                     it = first.getNext();
                     first = it;
-
                 }
                 // Fall 4: es soll in der Mitte gelöscht werden
                 else {

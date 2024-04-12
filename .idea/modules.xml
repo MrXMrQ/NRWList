@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/NRWList.iml" filepath="$PROJECT_DIR$/NRWList.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Queue-Stack-List.iml" filepath="$PROJECT_DIR$/Queue-Stack-List.iml" />
     </modules>
   </component>
 </project>
